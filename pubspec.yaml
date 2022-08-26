@@ -1,5 +1,5 @@
 name: extended_platform_view
-description: Add the ExtendedPlatformView widget to simplify PlatformView initialization & communication
+description: Adds the ExtendedPlatformView widget to simplify PlatformView initialization & communication
 version: 0.0.1
 homepage:
 
