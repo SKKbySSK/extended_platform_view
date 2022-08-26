@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:extended_platform_view/extended_platform_view_delegate.dart';
+import 'package:extended_platform_view/src/extended_platform_view_delegate.dart';
 import 'package:flutter/services.dart';
 
 /// [ExtendedPlatformViewDelegate] class that manages the associated

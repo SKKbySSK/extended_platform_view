@@ -1,5 +1,4 @@
 import 'package:extended_platform_view/extended_platform_view.dart';
-import 'package:extended_platform_view/method_channel_delegate.dart';
 import 'package:flutter/material.dart';
 
 void main() {
