@@ -8,7 +8,7 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         flutterEngine.extendedPlatformView.apply {
-            register(SamplePlatformView.viewType) { SamplePlatformView() }
+            register("sample_platform_view") { SamplePlatformView() }
         }
     }
 }

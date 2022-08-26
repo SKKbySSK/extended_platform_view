@@ -7,8 +7,9 @@ import work.kscafe.extended_platform_view.ExtendedPlatformView
 
 class SamplePlatformView: ExtendedPlatformView() {
     override fun initialize(params: CreationParams): View {
-        val textView = TextView(context)
-        textView.text = params.args as String
+        val textView = TextView(context).apply {
+            text = params.args as String
+        }
 
         // ExtendedPlatformView generates MethodChannel automatically
         methodChannel.setMethodCallHandler { call, result ->
@@ -22,9 +23,5 @@ class SamplePlatformView: ExtendedPlatformView() {
         }
 
         return textView
-    }
-
-    companion object {
-        const val viewType = "sample_platform_view"
     }
 }
