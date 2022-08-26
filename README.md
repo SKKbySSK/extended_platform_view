@@ -1,4 +1,4 @@
-# extended_platform_view
+# ExtendedPlatformView
 
 Adds the ExtendedPlatformView widget to simplify PlatformView initialization & communication.
 ExtendedPlatformView has these functionalities.
@@ -7,9 +7,8 @@ ExtendedPlatformView has these functionalities.
 - Switching HybridComposition and VirtualDisplay on Android
 - MethodChannel support
 
-## Getting Started
 
-### [Flutter] Create an ExtendedPlatformView widget
+## [Flutter] Create an ExtendedPlatformView widget
 ```dart
 Widget build(BuildContext context) {
   return ExtendedPlatformView(
@@ -21,9 +20,8 @@ Widget build(BuildContext context) {
 }
 ```
 
-### [Android] Add PlatformView class & register viewType
-
-#### Add PlatformView
+## [Android] Add PlatformView class & register viewType
+1. Add PlatformView class that extends the ExtendedPlatformView
 ```kotlin
 class SamplePlatformView: ExtendedPlatformView() {
     override fun initialize(params: CreationParams): View {
@@ -34,7 +32,7 @@ class SamplePlatformView: ExtendedPlatformView() {
 }
 ```
 
-#### Register PlatformView on FlutterActivity
+2. Register the PlatformView on FlutterActivity
 ```kotlin
 class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -46,9 +44,9 @@ class MainActivity: FlutterActivity() {
 }
 ```
 
-### [iOS] Add PlatformView class & register viewType
+## [iOS] Add PlatformView class & register viewType
 
-#### Add PlatformView
+1. Add PlatformView class that extends the ExtendedPlatformView
 ```swift
 import extended_platform_view
 
@@ -62,8 +60,7 @@ class SamplePlatformView: ExtendedPlatformView {
 }
 ```
 
-#### Register PlatformView on AppDelegate
-You have to register ExtendedPlatformView before calling `GeneratedPluginRegistrant.register(with: self)`
+2. Register the PlatformView on AppDelegate
 ```swift
 import extended_platform_view
 
@@ -73,6 +70,7 @@ import extended_platform_view
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // You have to register ExtendedPlatformView before calling `GeneratedPluginRegistrant.register(with: self)`
         ExtendedPlatformViewRegistrar.register(viewType: "sample_platform_view", builder: { SamplePlatformView() })
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
