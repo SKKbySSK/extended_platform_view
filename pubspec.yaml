@@ -1,7 +1,7 @@
 name: extended_platform_view
 description: Adds the ExtendedPlatformView widget to simplify PlatformView initialization & communication
 version: 0.0.1
-homepage:
+repository: https://github.com/SKKbySSK/extended_platform_view
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
