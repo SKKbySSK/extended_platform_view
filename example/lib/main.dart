@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       config: const ExtendedPlatformViewConfig(
         viewType: 'sample_platform_view',
         androidCompositionMode: AndroidCompositionMode.hybridComposition,
+        creationParams: "initial text",
       ),
       methodChannelDelegate: MethodChannelDelegate(
         onCreate: (channel) async {

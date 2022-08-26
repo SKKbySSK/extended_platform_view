@@ -10,9 +10,9 @@ import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 
-typealias ExtendedPlatformViewBuilder = (CreationParams) -> ExtendedPlatformView
+typealias ExtendedPlatformViewBuilder = () -> ExtendedPlatformView
 
-data class CreationParams(val context: Context, val viewId: Int, val args: Any?)
+data class CreationParams(val viewId: Int, val args: Any?)
 
 abstract class ExtendedPlatformView() {
     lateinit var context: Context
@@ -24,14 +24,14 @@ abstract class ExtendedPlatformView() {
     lateinit var view: View
         private set
 
-    internal fun initInternal(context: Context, messenger: BinaryMessenger, viewType: String, id: Int) {
+    internal fun initInternal(context: Context, messenger: BinaryMessenger, viewType: String, id: Int, params: CreationParams) {
         this.context = context
         binaryMessenger = messenger
         methodChannel = MethodChannel(messenger, "${viewType}/${id}/method")
-        view = initialize()
+        view = initialize(params)
     }
 
-    abstract fun initialize(): View
+    abstract fun initialize(params: CreationParams): View
 
     fun onFlutterViewAttached(flutterView: View) {}
     fun onFlutterViewDetached() {}
@@ -44,9 +44,11 @@ internal class ExtendedPlatformViewFactoryWrapper(
     private val builder: ExtendedPlatformViewBuilder): PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
-        // MEMO: force unwrapping context. see: https://github.com/flutter/flutter/issues/104480
-        val view = builder(CreationParams(context!!, viewId, args)).also {
-            it.initInternal(context, messenger, viewType, viewId)
+        val view = builder().also {
+            val params = CreationParams(viewId, args)
+
+            // MEMO: force unwrapping context. see: https://github.com/flutter/flutter/issues/104480
+            it.initInternal(context!!, messenger, viewType, viewId, params)
         }
         return ExtendedPlatformViewWrapper(view)
     }
